@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.el-card__footer {
+  @apply bg-gray-50;
+}
+.el-form-item__label {
+  @apply font-bold;
+}
+th.el-table__cell {
+  white-space: nowrap;
+  background-color: #909399 !important;
+  color: white;
+}
+.el-menu {
+  border: 0 !important;
+}
+.el-aside:has(.el-menu.el-menu--vertical.el-menu--collapse) {
+    @apply hidden sm:flex;
+}
+.monaco-editor.vs-dark {
+  @apply !h-[20rem];
+}
+code {
+  @apply bg-zinc-800 text-white p-2 px-3 leading-5 rounded w-full text-sm;
+}
+.link {
+  @apply underline text-blue-500 cursor-pointer;
+}

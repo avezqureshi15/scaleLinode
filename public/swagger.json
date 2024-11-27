@@ -1,0 +1,1544 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "This API manages environments, credentials, launch templates, and ASGs for Linode accounts.",
+        "version": "initial",
+        "title": "Scale Linode",
+        "termsOfService": "http://linode.com/terms/",
+        "contact":
+        {
+            "email": "support@linode.com"
+        },
+        "license":
+        {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "api.apwest.scalelinode.com",
+    "basePath": "/",
+    "schemes":
+    [
+        "https"
+    ],
+    "paths":
+    {
+        "/auth-service/v1/signin":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "auth"
+                ],
+                "summary": "User Login",
+                "description": "Login to the system using email and password.",
+                "operationId": "signin",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "body",
+                        "name": "credentials",
+                        "description": "User credentials for login",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/Login"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Login successful",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/LoginResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/asg-service/v1/launchTemplates.create":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "launchTemplates"
+                ],
+                "summary": "Create Launch Template",
+                "description": "Create a new launch template for an environment.",
+                "operationId": "createLaunchTemplate",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Launch template data",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/LaunchTemplate"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Launch template created successfully"
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/asg-service/v1/launchTemplates.list":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "launchTemplates"
+                ],
+                "summary": "List Launch Templates",
+                "description": "List all launch templates.",
+                "operationId": "listLaunchTemplates",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "List of launch templates",
+                        "schema":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "$ref": "#/definitions/LaunchTemplateResponse"
+                            }
+                        }
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/asg-service/v1/launchTemplate.update":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "launchTemplates"
+                ],
+                "summary": "Update Launch Template",
+                "description": "Update an existing launch template.",
+                "operationId": "updateLaunchTemplate",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Updated launch template data",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/LaunchTemplateUpdate"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Launch template updated successfully"
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/asg-service/v1/launchTemplate.describe":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "launchTemplates"
+                ],
+                "summary": "Describe Launch Template",
+                "description": "Get details of a specific launch template.",
+                "operationId": "describeLaunchTemplate",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Launch template ID and version",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/DescribeLaunchTemplateRequest"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Launch template description"
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/asg-service/v1/launchTemplate.delete":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "launchTemplates"
+                ],
+                "summary": "Delete Launch Template",
+                "description": "Delete a specific launch template.",
+                "operationId": "deleteLaunchTemplate",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Launch template ID",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/DeleteLaunchTemplateRequest"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Launch template deleted successfully"
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/asg-service/v1/asg.listArnLogs":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "asg"
+                ],
+                "summary": "List ASG Logs",
+                "description": "Retrieve a list of ASG logs.",
+                "operationId": "listArnLogs",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Pagination information",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ListArnLogsRequest"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "List of ASG logs",
+                        "schema":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "$ref": "#/definitions/ArnLogResponse"
+                            }
+                        }
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/artillery-service/v1/credential.create":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "credentials"
+                ],
+                "summary": "Create a new credential",
+                "description": "Stores a new credential object with name and value.",
+                "operationId": "createCredential",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Credential object containing name and value",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/Credential"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Credential created successfully",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CredentialResponse"
+                        }
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/artillery-service/v1/credential.list":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "credentials"
+                ],
+                "summary": "List all credentials",
+                "description": "Retrieve all stored credentials.",
+                "operationId": "listCredentials",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "List of credentials",
+                        "schema":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "$ref": "#/definitions/CredentialResponse"
+                            }
+                        }
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/artillery-service/v1/credential.update":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "credentials"
+                ],
+                "summary": "Update a credential",
+                "description": "Updates an existing credential with new values.",
+                "operationId": "updateCredential",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Updated credential data",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CredentialUpdate"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Credential updated successfully",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CredentialResponse"
+                        }
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/artillery-service/v1/credential.delete":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "credentials"
+                ],
+                "summary": "Delete a credential",
+                "description": "Deletes an existing credential by ID.",
+                "operationId": "deleteCredential",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Credential ID to delete",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CredentialDelete"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Credential deleted successfully"
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/artillery-service/v1/environment.create":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "environments"
+                ],
+                "summary": "Create a new environment",
+                "description": "Create a new environment by specifying its name.",
+                "operationId": "createEnvironment",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Environment data",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/Environment"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Environment created"
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/artillery-service/v1/environment.list":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "environments"
+                ],
+                "summary": "List all environments",
+                "description": "Retrieve a list of environments.",
+                "operationId": "listEnvironments",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "List of environments",
+                        "schema":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "$ref": "#/definitions/EnvironmentResponse"
+                            }
+                        }
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/artillery-service/v1/environment.update":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "environments"
+                ],
+                "summary": "Update an environment",
+                "description": "Update an existing environment.",
+                "operationId": "updateEnvironment",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Updated environment data",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/EnvironmentUpdate"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Environment updated"
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/artillery-service/v1/environment.listVariable":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "environment variables"
+                ],
+                "summary": "List environment variables",
+                "description": "List all variables within a specific environment.",
+                "operationId": "listEnvironmentVariables",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Environment ID",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/EnvironmentVariableRequest"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "List of environment variables",
+                        "schema":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "$ref": "#/definitions/EnvironmentVariableResponse"
+                            }
+                        }
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/artillery-service/v1/environment.createVariable":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "environment variables"
+                ],
+                "summary": "Create environment variable",
+                "description": "Create a new variable within an environment.",
+                "operationId": "createEnvironmentVariable",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Variable data",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/EnvironmentVariable"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Environment variable created"
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/artillery-service/v1/environment.createVariableFromFile":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "environment variables"
+                ],
+                "summary": "Create environment variable from file",
+                "description": "Upload a file to create variables within an environment.",
+                "operationId": "createEnvironmentVariableFromFile",
+                "consumes":
+                [
+                    "multipart/form-data"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "formData",
+                        "name": "environment_id",
+                        "description": "ID of the environment",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "file",
+                        "description": "File containing environment variables",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Environment variables created"
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/artillery-service/v1/environment.deleteVariable":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "environment variables"
+                ],
+                "summary": "Delete environment variable",
+                "description": "Delete a specific variable from an environment.",
+                "operationId": "deleteEnvironmentVariable",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Environment ID and Variable ID",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/DeleteEnvironmentVariableRequest"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Environment variable deleted"
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        },
+        "/artillery-service/v1/environment.delete":
+        {
+            "post":
+            {
+                "tags":
+                [
+                    "environments"
+                ],
+                "summary": "Delete environment",
+                "description": "Delete a specific environment.",
+                "operationId": "deleteEnvironment",
+                "consumes":
+                [
+                    "application/json"
+                ],
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Environment ID",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/DeleteEnvironmentRequest"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Environment deleted"
+                    }
+                },
+                "security":
+                [
+                    {
+                        "bearerAuth":
+                        []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions":
+    {
+        "Login":
+        {
+            "type": "object",
+            "required":
+            [
+                "email",
+                "password"
+            ],
+            "properties":
+            {
+                "email":
+                {
+                    "type": "string",
+                    "example": "user@linode.com"
+                },
+                "password":
+                {
+                    "type": "string",
+                    "example": "password123"
+                }
+            }
+        },
+        "LoginResponse":
+        {
+            "type": "object",
+            "properties":
+            {
+                "token":
+                {
+                    "type": "string",
+                    "example": "eyJhbGciOiJSUzI1NiJ9"
+                }
+            }
+        },
+        "LaunchTemplate":
+        {
+            "type": "object",
+            "required":
+            [
+                "name",
+                "password",
+                "image_id",
+                "plan_id",
+                "environment_id",
+                "linode_token_id",
+                "region_id",
+                "launch_method",
+                "launch_data",
+                "port",
+                "firewall_id"
+            ],
+            "properties":
+            {
+                "name":
+                {
+                    "type": "string",
+                    "example": "testing"
+                },
+                "password":
+                {
+                    "type": "string",
+                    "example": "W8LKW5Gw4[iD$"
+                },
+                "is_private_image":
+                {
+                    "type": "boolean",
+                    "example": false
+                },
+                "image_id":
+                {
+                    "type": "string",
+                    "example": "linode/ubuntu24.04"
+                },
+                "plan_id":
+                {
+                    "type": "string",
+                    "example": "g6-standard-1"
+                },
+                "environment_id":
+                {
+                    "type": "string",
+                    "example": "env:qdCFUo5EXRgpZsDKfh4gZ3"
+                },
+                "linode_token_id":
+                {
+                    "type": "string",
+                    "example": "cred:ak9DoGb6Cucd4E7BLpFjVE"
+                },
+                "region_id":
+                {
+                    "type": "string",
+                    "example": "in-maa"
+                },
+                "launch_method":
+                {
+                    "type": "string",
+                    "example": "run_script"
+                },
+                "launch_data":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "run_script":
+                        {
+                            "type": "string",
+                            "example": "WldOb2J5QWlaRzl1WlNJPQ=="
+                        },
+                        "start_command":
+                        {
+                            "type": "string",
+                            "example": "WkdGMFpRPT0="
+                        }
+                    }
+                },
+                "port":
+                {
+                    "type": "string",
+                    "example": "80"
+                },
+                "firewall_id":
+                {
+                    "type": "integer",
+                    "example": 478054
+                }
+            }
+        },
+        "LaunchTemplateResponse":
+        {
+            "type": "object",
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "example": "lt:LSuUzzGujLLLbkDC6KC6z4"
+                },
+                "name":
+                {
+                    "type": "string",
+                    "example": "testing"
+                },
+                "version":
+                {
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "LaunchTemplateUpdate":
+        {
+            "type": "object",
+            "required":
+            [
+                "lt_id",
+                "name",
+                "version",
+                "image_id",
+                "plan_id",
+                "environment_id",
+                "linode_token_id",
+                "region_id",
+                "launch_method",
+                "launch_data",
+                "port",
+                "firewall_id"
+            ],
+            "properties":
+            {
+                "lt_id":
+                {
+                    "type": "string",
+                    "example": "lt:LSuUzzGujLLLbkDC6KC6z4"
+                },
+                "name":
+                {
+                    "type": "string",
+                    "example": "testing"
+                },
+                "version":
+                {
+                    "type": "integer",
+                    "example": 2
+                },
+                "password":
+                {
+                    "type": "string",
+                    "example": "n0lgp0ywb%if$"
+                },
+                "is_private_image":
+                {
+                    "type": "boolean",
+                    "example": false
+                },
+                "image_id":
+                {
+                    "type": "string",
+                    "example": "linode/ubuntu24.04"
+                },
+                "plan_id":
+                {
+                    "type": "string",
+                    "example": "g6-standard-1"
+                },
+                "environment_id":
+                {
+                    "type": "string",
+                    "example": "env:qdCFUo5EXRgpZsDKfh4gZ3"
+                },
+                "linode_token_id":
+                {
+                    "type": "string",
+                    "example": "cred:ak9DoGb6Cucd4E7BLpFjVE"
+                },
+                "region_id":
+                {
+                    "type": "string",
+                    "example": "in-maa"
+                },
+                "launch_method":
+                {
+                    "type": "string",
+                    "example": "run_script"
+                },
+                "launch_data":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "run_script":
+                        {
+                            "type": "string",
+                            "example": "WldOb2J5QWlaRzl1WlNJPQ=="
+                        },
+                        "start_command":
+                        {
+                            "type": "string",
+                            "example": "WkdGMFpRPT0="
+                        }
+                    }
+                },
+                "port":
+                {
+                    "type": "string",
+                    "example": "80"
+                },
+                "firewall_id":
+                {
+                    "type": "integer",
+                    "example": 478054
+                }
+            }
+        },
+        "DescribeLaunchTemplateRequest":
+        {
+            "type": "object",
+            "required":
+            [
+                "lt_id",
+                "version"
+            ],
+            "properties":
+            {
+                "lt_id":
+                {
+                    "type": "string",
+                    "example": "lt:LSuUzzGujLLLbkDC6KC6z4"
+                },
+                "version":
+                {
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "DeleteLaunchTemplateRequest":
+        {
+            "type": "object",
+            "required":
+            [
+                "id"
+            ],
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "example": "lt:LSuUzzGujLLLbkDC6KC6z4"
+                }
+            }
+        },
+        "ListArnLogsRequest":
+        {
+            "type": "object",
+            "required":
+            [
+                "page",
+                "limit"
+            ],
+            "properties":
+            {
+                "page":
+                {
+                    "type": "integer",
+                    "example": 1
+                },
+                "limit":
+                {
+                    "type": "integer",
+                    "example": 10
+                }
+            }
+        },
+        "ArnLogResponse":
+        {
+            "type": "object",
+            "properties":
+            {
+                "log_id":
+                {
+                    "type": "string",
+                    "example": "log:12345"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "example": "Auto-scaling group log message"
+                },
+                "timestamp":
+                {
+                    "type": "string",
+                    "example": "2024-09-10T12:00:00Z"
+                }
+            }
+        },
+        "Credential":
+        {
+            "type": "object",
+            "required":
+            [
+                "name",
+                "value"
+            ],
+            "properties":
+            {
+                "name":
+                {
+                    "type": "string",
+                    "example": "API_KEY"
+                },
+                "value":
+                {
+                    "type": "string",
+                    "example": "secret_key"
+                }
+            }
+        },
+        "CredentialResponse":
+        {
+            "type": "object",
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "example": "cred:12345"
+                },
+                "name":
+                {
+                    "type": "string",
+                    "example": "API_KEY"
+                },
+                "value":
+                {
+                    "type": "string",
+                    "example": "secret_key"
+                }
+            }
+        },
+        "CredentialUpdate":
+        {
+            "type": "object",
+            "required":
+            [
+                "id",
+                "name",
+                "value"
+            ],
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "example": "cred:12345"
+                },
+                "name":
+                {
+                    "type": "string",
+                    "example": "Updated API_KEY"
+                },
+                "value":
+                {
+                    "type": "string",
+                    "example": "updated_secret_key"
+                }
+            }
+        },
+        "CredentialDelete":
+        {
+            "type": "object",
+            "required":
+            [
+                "id"
+            ],
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "example": "cred:12345"
+                }
+            }
+        },
+        "Environment":
+        {
+            "type": "object",
+            "required":
+            [
+                "name"
+            ],
+            "properties":
+            {
+                "name":
+                {
+                    "type": "string",
+                    "example": "test"
+                }
+            }
+        },
+        "EnvironmentResponse":
+        {
+            "type": "object",
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "example": "env:5JqJ88F3CrWKT44rCosMye"
+                },
+                "name":
+                {
+                    "type": "string",
+                    "example": "test"
+                }
+            }
+        },
+        "EnvironmentUpdate":
+        {
+            "type": "object",
+            "required":
+            [
+                "id",
+                "name"
+            ],
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "example": "env:5JqJ88F3CrWKT44rCosMye"
+                },
+                "name":
+                {
+                    "type": "string",
+                    "example": "testaa"
+                }
+            }
+        },
+        "EnvironmentVariableRequest":
+        {
+            "type": "object",
+            "required":
+            [
+                "environment_id"
+            ],
+            "properties":
+            {
+                "environment_id":
+                {
+                    "type": "string",
+                    "example": "env:5JqJ88F3CrWKT44rCosMye"
+                }
+            }
+        },
+        "EnvironmentVariable":
+        {
+            "type": "object",
+            "required":
+            [
+                "name",
+                "value",
+                "environment_id"
+            ],
+            "properties":
+            {
+                "name":
+                {
+                    "type": "string",
+                    "example": "TEST"
+                },
+                "value":
+                {
+                    "type": "string",
+                    "example": "a"
+                },
+                "environment_id":
+                {
+                    "type": "string",
+                    "example": "env:5JqJ88F3CrWKT44rCosMye"
+                }
+            }
+        },
+        "EnvironmentVariableResponse":
+        {
+            "type": "object",
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "example": "var:VCHErZcdSABLJBebrZwPeb"
+                },
+                "name":
+                {
+                    "type": "string",
+                    "example": "TEST"
+                },
+                "value":
+                {
+                    "type": "string",
+                    "example": "a"
+                }
+            }
+        },
+        "DeleteEnvironmentVariableRequest":
+        {
+            "type": "object",
+            "required":
+            [
+                "environment_id",
+                "id"
+            ],
+            "properties":
+            {
+                "environment_id":
+                {
+                    "type": "string",
+                    "example": "env:5JqJ88F3CrWKT44rCosMye"
+                },
+                "id":
+                {
+                    "type": "string",
+                    "example": "var:VCHErZcdSABLJBebrZwPeb"
+                }
+            }
+        },
+        "DeleteEnvironmentRequest":
+        {
+            "type": "object",
+            "required":
+            [
+                "id"
+            ],
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "example": "env:5JqJ88F3CrWKT44rCosMye"
+                }
+            }
+        }
+    },
+    "securityDefinitions":
+    {
+        "bearerAuth":
+        {
+            "type": "apiKey",
+            "name": "authorization",
+            "in": "header"
+        }
+    }
+}
